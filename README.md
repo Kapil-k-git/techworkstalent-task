@@ -28,13 +28,13 @@ Before you begin, ensure you have met the following requirements:
 2. **Navigate to the frontend project directory:**
 
    ```bash
-   cd frontend
+   cd client
    ```
 
 3. **Navigate to the backend project directory:**
 
    ```bash
-   cd backend
+   cd api
    ```
 
 4. **Install the dependencies:**
@@ -51,8 +51,8 @@ To set up environment variables, follow these steps:
 2. Add your environment-specific variables in the `.env` file.
 
    ```bash
-   NEXT_PUBLIC_BASE_URL=http://localhost:8080/api/
-   NEXT_PUBLIC_SERVER_URL=ttp://localhost:8080
+   NEXT_PUBLIC_BASE_URL=http://localhost:8080/api
+   NEXT_PUBLIC_SERVER_URL=http://localhost:8080
    ```
 
 3. Create a `.env` file in the backend directory of your project.
@@ -62,8 +62,6 @@ To set up environment variables, follow these steps:
    PORT=8080
    MONGODB_URI=mongodb+srv://abcd:jUWWHxiQVATiA04w@cluster0.zfzgq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
    SECRETEKEY=SECRETEKEY
-   # login id:-john@gmail.com
-   # password:-john@1234
     ```
 
 ## Running the Application
