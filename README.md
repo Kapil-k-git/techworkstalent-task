@@ -1,4 +1,4 @@
-# upRaqx
+# Techworkstalent-Task
 
 ## Table of Contents
 
@@ -22,7 +22,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Aditya-Dev-01/upRaqx.git
+   git clone https://github.com/Kapil-k-git/techworkstalent-task.git
    ```
 
 2. **Navigate to the frontend project directory:**
