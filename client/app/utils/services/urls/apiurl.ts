@@ -1,4 +1,15 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// Get base URL depending on environment
+const getBaseURL = () => {
+  if (process.env.NODE_ENV === 'production') {
+    // Production: API is on same domain
+    return '/api';
+  } else {
+    // Development: Use environment variable
+    return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:8080/api';
+  }
+};
+
+const BASE_URL = getBaseURL();
 
 const apiUrls = {
   signIn: `${BASE_URL}/signin`,
