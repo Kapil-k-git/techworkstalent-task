@@ -27,7 +27,7 @@ const initialState: MovieState = {
   error: null,
 };
 
-const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
 
 export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
@@ -66,10 +66,14 @@ export const createMovie = createAsyncThunk(
   "movies/createMovie",
   async (formData: FormData, { rejectWithValue }) => {
     try {
+        const token =
+        typeof window !== "undefined"
+          ? localStorage.getItem("token") || sessionStorage.getItem("token")
+          : null;
       const response = await axios.post(`${apiUrls.createMovie}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
+          ...(token && { Authorization: `Bearer ${token}` }),
         },
       });
       return response.data;
@@ -84,11 +88,14 @@ export const updateMovie = createAsyncThunk(
   "movies/updateMovie",
   async ({ id, formData }: any, { rejectWithValue }) => { 
     try {
-      console.log(formData, "formData in thunk");
+        const token =
+        typeof window !== "undefined"
+          ? localStorage.getItem("token") || sessionStorage.getItem("token")
+          : null;
       const response = await axios.put(apiUrls.updateMovie(id), formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
+          ...(token && { Authorization: `Bearer ${token}` }),
         },
       });
       console.log(response,"response")
