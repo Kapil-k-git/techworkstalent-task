@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { CacheModule } from '@nestjs/cache-manager';
@@ -28,11 +28,19 @@ import { AppService } from './app.service';
     }),
     
     MongooseModule.forRootAsync({
-      useFactory: () => {
-        const mongoUri = process.env.MONGODB_URI;
-        if (!mongoUri) {
-          throw new Error('MONGODB_URI environment variable is not defined.');
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        const mongoUri = configService.get<string>('MONGODB_URI') || 
+                         process.env.MONGODB_URI || 
+                         'mongodb://localhost:27017/test'; // Fallback for development
+        
+        console.log('MongoDB URI exists:', !!mongoUri);
+        console.log('NODE_ENV:', process.env.NODE_ENV);
+        
+        if (!mongoUri || mongoUri === 'mongodb://localhost:27017/test') {
+          console.warn('Using fallback MongoDB URI. Make sure MONGODB_URI is set in production.');
         }
+        
         return {
           uri: mongoUri,
           maxPoolSize: 10,
@@ -40,6 +48,7 @@ import { AppService } from './app.service';
           socketTimeoutMS: 45000,
         };
       },
+      inject: [ConfigService],
     }),
     
     UserModule,

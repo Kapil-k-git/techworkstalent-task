@@ -10,7 +10,7 @@ const BASE_URL = getBaseURL();
 
 const apiUrls = {
   signIn: `${BASE_URL}/signin`,
-  signUp: `${BASE_URL}/signup`, 
+  signUp: `${BASE_URL}/signup`,
   fetchMovies: `${BASE_URL}/movies`,
   fetchMovieById: (id: string) => `${BASE_URL}/movies/${id}`,
   createMovie: `${BASE_URL}/movies`,

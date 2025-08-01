@@ -13,8 +13,12 @@ export class MoviesService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
-  async createMovie(createMovieDto: CreateMovieDto, posterPath: string): Promise<MovieDocument> {
+  async createMovie(createMovieDto: CreateMovieDto, file: Express.Multer.File): Promise<MovieDocument> {
     try {
+      // For serverless, we'll store the file as base64 or use cloud storage
+      // For now, let's store as base64 in the database
+      const posterPath = file ? `data:${file.mimetype};base64,${file.buffer.toString('base64')}` : '/placeholder.jpg';
+      
       const movieData = {
         ...createMovieDto,
         year: createMovieDto.year.toString(),
@@ -26,7 +30,7 @@ export class MoviesService {
       await this.cacheManager.del('movies:all');
       
       return newMovie;
-    } catch (error) {
+    } catch (error: any) {
       if (error.code === 11000) {
         throw new ConflictException('Movie with this title already exists');
       }
@@ -54,7 +58,7 @@ export class MoviesService {
 
   async getAllMovies(page: number = 1, perPage: number = 10) {
     const cacheKey = `movies:all:${page}:${perPage}`;
-    const cachedResult = await this.cacheManager.get(cacheKey);
+    const cachedResult = await this.cacheManager.get(cacheKey) as any;
     
     if (cachedResult) {
       return cachedResult;
@@ -80,15 +84,15 @@ export class MoviesService {
     return result;
   }
 
-  async updateMovie(id: string, updateMovieDto: UpdateMovieDto, posterPath?: string): Promise<MovieDocument> {
+  async updateMovie(id: string, updateMovieDto: UpdateMovieDto, file?: Express.Multer.File): Promise<MovieDocument> {
     const updateData: any = { ...updateMovieDto };
     
     if (updateMovieDto.year) {
       updateData.year = updateMovieDto.year.toString();
     }
     
-    if (posterPath) {
-      updateData.poster = posterPath;
+    if (file) {
+      updateData.poster = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
     }
 
     const updatedMovie = await this.movieModel.findByIdAndUpdate(
@@ -119,7 +123,7 @@ export class MoviesService {
 
   async searchMovies(query: string, page: number = 1, perPage: number = 10) {
     const cacheKey = `search:${query}:${page}:${perPage}`;
-    const cachedResult = await this.cacheManager.get(cacheKey);
+    const cachedResult = await this.cacheManager.get(cacheKey) as any;
     
     if (cachedResult) {
       return cachedResult;

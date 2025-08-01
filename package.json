@@ -1,9 +1,16 @@
-  {
+{
     "name": "Techworkstalent-app",
     "version": "1.0.0",
     "scripts": {
-      "build": "cd client && npm run build",
+      "build": "cd api && npm run vercel-build && cd ../client && npm run build",
+      "build:api": "cd api && npm run vercel-build",
+      "build:client": "cd client && npm run build",
       "dev:client": "cd client && npm run dev",
-      "dev:api": "cd api && npm run start:dev"
+      "dev:api": "cd api && npm run start:dev",
+      "dev": "concurrently \"npm run dev:api\" \"npm run dev:client\"",
+      "install:all": "cd api && npm install && cd ../client && npm install"
+    },
+    "devDependencies": {
+      "concurrently": "^8.2.2"
     }
   }

@@ -75,8 +75,8 @@ export class MoviesController {
       throw new BadRequestException('Poster image is required');
     }
 
-    const posterPath = `/uploads/${file.filename}`;
-    const movie = await this.moviesService.createMovie(createMovieDto, posterPath);
+    // Pass the file object directly to the service (not a path)
+    const movie = await this.moviesService.createMovie(createMovieDto, file);
 
     return {
       message: 'Movie created successfully',
@@ -187,8 +187,7 @@ export class MoviesController {
     @Body() updateMovieDto: UpdateMovieDto,
     @UploadedFile() file?: Express.Multer.File,
   ) {
-    const posterPath = file ? `/uploads/${file.filename}` : undefined;
-    const movie = await this.moviesService.updateMovie(id, updateMovieDto, posterPath);
+    const movie = await this.moviesService.updateMovie(id, updateMovieDto, file);
 
     return {
       message: 'Movie updated successfully',
