@@ -1,3 +1,4 @@
+// src/movies/entities/movie.entity.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
@@ -12,7 +13,10 @@ export class Movie {
   year: string;
 
   @Prop({ required: true })
-  poster: string;
+  poster: string; // Cloudinary URL
+
+  @Prop({ required: false })
+  cloudinaryPublicId: string; // Store Cloudinary public ID for deletion
 
   @Prop()
   createdAt: Date;
