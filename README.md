@@ -62,6 +62,9 @@ To set up environment variables, follow these steps:
    PORT=8080
    MONGODB_URI=mongodb+srv://abcd:jUWWHxiQVATiA04w@cluster0.zfzgq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
    SECRETEKEY=SECRETEKEY
+   CLOUDINARY_CLOUD_NAME=
+   CLOUDINARY_API_KEY=
+   CLOUDINARY_API_SECRET=
     ```
 
 ## Running the Application
