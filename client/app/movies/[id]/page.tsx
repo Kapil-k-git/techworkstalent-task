@@ -111,7 +111,7 @@ const EditMovie = () => {
     };
 
     return (
-        <div className="p-8 sm:py-10 sm:px-20 lg:py-20 lg:px-40 flex flex-col gap-10 md:gap-[120px] mx-auto max-w-[1440px] min-h-[calc(100vh-120px)]">
+        <div className="p-8 sm:py-10 sm:px-20 2xl:py-20 lg:px-40 flex flex-col gap-10 mx-auto max-w-[1440px] min-h-[calc(100vh-120px)]">
             <div className="flex justify-between items-center text-white">
                 <div className="flex flex-col items-start justify-center gap-2">
                     <h1 className="text-[16px] md:text-[48px] text-white font-semibold">
@@ -145,7 +145,7 @@ const EditMovie = () => {
                     {({ setFieldValue, values, handleChange, resetForm, errors }) => {
                         return (
                             <Form>
-                                <div className="grid grid-cols-1 md:grid-cols-4 gap-10 sm:gap-20 lg:gap-32 w-full">
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-10 w-full">
                                     <div className="col-span-2 flex flex-col gap-10">
                                         <div className="sm:hidden flex flex-col gap-5">
                                             <div>

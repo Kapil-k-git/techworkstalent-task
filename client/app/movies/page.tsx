@@ -59,7 +59,7 @@ const Movies = () => {
         <>
             {movies.length === 0 ? (
                 <div className="px-4 relative">
-                    <div className="cursor-pointer flex absolute right-7 top-10 items-center justify-center gap-2 sm:gap-3" onClick={logout}>
+                    <div className="cursor-pointer flex absolute right-32 top-24 items-center justify-center gap-2 sm:gap-3" onClick={logout}>
                         <h4 className="font-bold text-white text-base">{t('logout')}</h4>
                             <Image src={Logout} width={32} height={32} className="max-lg:size-6" alt="logout" />
                         </div>
@@ -80,7 +80,7 @@ const Movies = () => {
                 </div>
             </div>
             ) : (
-                <div className="p-8 sm:py-10 sm:px-20 lg:py-20 lg:px-40 flex flex-col gap-10 md:gap-[120px] mx-auto max-w-[1440px] w-full min-h-[calc(100vh-120px)]">
+                <div className="p-8 sm:py-10 sm:px-20 2xl:py-20 lg:px-40 flex flex-col gap-10 mx-auto max-w-[1440px] w-full min-h-[calc(100vh-120px)]">
                     <div className="flex justify-between items-center text-white">
                         <div className="flex items-center justify-center gap-2 sm:gap-5">
                             <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl xl:leading-[56px]  text-white font-semibold">
@@ -106,7 +106,7 @@ const Movies = () => {
                         ) : error ? (
                             <div className="text-white text-center">{t('error')}</div>
                         ) : (
-                            <div className="flex flex-col gap-20 md:gap-[120px]">
+                            <div className="flex flex-col gap-10">
                                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-5 md:gap-7">
                                     {movies.length > 0 && movies?.map((movie) => (
                                         <div key={movie._id} onClick={() => handleEdit(movie._id)} className="flex w-full">

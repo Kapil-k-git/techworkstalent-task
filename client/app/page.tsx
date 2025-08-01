@@ -75,7 +75,7 @@ export default function Home() {
   }, [error]);
 
   return (
-    <section className="flex flex-col justify-center  gap-[10px] items-center min-h-[calc(100vh-120px)]">
+    <section className="flex flex-col justify-center gap-[10px] items-center min-h-[calc(100vh-120px)]">
       <LanguageSwitcher />
       {loading ? (
         <div className="text-white">{t('loading')}</div>

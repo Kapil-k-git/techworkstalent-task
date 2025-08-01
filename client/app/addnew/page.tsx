@@ -56,7 +56,7 @@ const AddNew = () => {
     };
 
     return (
-        <div className="p-8 sm:py-10 lg:pt-20 lg:pb-0 sm:px-20 lg:px-40 flex flex-col gap-10 md:gap-[120px] max-w-[1440px] mx-auto min-h-[calc(100vh-120px)]">
+        <div className="p-8 sm:py-10 2xl:py-20 sm:px-20 lg:px-40 flex flex-col gap-10 max-w-[1440px] mx-auto min-h-[calc(100vh-120px)]">
             <div className="flex justify-between items-center text-white">
             <div className="flex flex-col items-start justify-center gap-2">
                 <h1 className="text-[20px] sm:text-[24px] md:text-[48px] text-white font-semibold">
@@ -88,7 +88,7 @@ const AddNew = () => {
             >
                 {({ setFieldValue, values, resetForm, handleChange, errors }) => (
                     <Form>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 xl:gap-32 w-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
                             <div className="flex flex-col gap-10">
                                 <div className="sm:hidden flex flex-col gap-5">
                                     <div>
