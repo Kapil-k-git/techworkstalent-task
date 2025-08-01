@@ -21,7 +21,7 @@
     "prev": "Anterior",
     "next": "Siguiente",
     "select-language": "Seleccionar idioma",
-    "edit-movie": "Editar película",
+    "edit": "Editar",
     "title-required": "El título es obligatorio.",
     "year-required": "El año es obligatorio.",
     "year-min": "El año no puede ser anterior a 1900.",
@@ -31,6 +31,7 @@
     "movie-update-success": "Película actualizada con éxito!",
     "movie-update-error": "Error al actualizar la película.",
     "language": "Español",
-    "went-wrong": "Algo salió mal"
+    "went-wrong": "Algo salió mal",
+    "← back": "← atrás"
   }
   

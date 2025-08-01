@@ -1,6 +1,5 @@
 "use client";
-import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/Footer/Footer";
 import { Provider } from "react-redux";
@@ -13,7 +12,6 @@ import "../i18n";
 import { useEffect } from "react";
 import { useTranslation } from "@/node_modules/react-i18next";
 
-// const inter = Inter({ subsets: ["latin"] });
 const monteserrat = Montserrat({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -21,7 +21,7 @@
     "prev": "Vorige",
     "next": "Volgende",
     "select-language": "Selecteer taal",
-    "edit-movie": "Film bewerken",
+    "edit": "bewerking",
     "title-required": "Titel is verplicht.",
     "year-required": "Jaar is verplicht.",
     "year-min": "Het jaar kan niet eerder zijn dan 1900.",
@@ -31,7 +31,8 @@
     "movie-update-success": "Film succesvol bijgewerkt!",
     "movie-update-error": "Bijwerken van de film mislukt.",
     "language": "Nederlands",
-    "went-wrong": "Er ging iets mis"
+    "went-wrong": "Er ging iets mis",
+    "← back": "← terug"
     
   }
   

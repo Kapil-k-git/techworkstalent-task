@@ -12,7 +12,7 @@ import { UserModule } from '../user/user.module';
     MulterModule.register({
       dest: './uploads',
     }),
-    UserModule, // Import UserModule to use JwtAuthGuard
+    UserModule,
   ],
   controllers: [MoviesController],
   providers: [MoviesService],

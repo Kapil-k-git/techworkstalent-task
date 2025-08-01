@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useTranslation } from "@/node_modules/react-i18next"; // Import useTranslation
+import { useTranslation } from "@/node_modules/react-i18next";
 
 interface Option {
-    value: string; // Change to string to match language codes like 'en', 'fr', etc.
+    value: string;
     label: string;
 }
 
@@ -13,7 +13,7 @@ interface CustomSelectProps {
     selectTextColor?: string;
     bgColor?: string;
     height?: string;
-    onSelect: (value: string) => void; // Update type to string
+    onSelect: (value: string) => void;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -37,11 +37,11 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     };
 
     return (
-        <div className="relative mt-1">
+        <div className="relative mt-1 mb-5">
             <button
                 onClick={toggleDropdown}
                 style={{ backgroundColor: selectColor, color: selectTextColor }}
-                className="block w-[180px] h-[40px] sm:h-[50px] p-2 sm:p-4 font-bold text-sm text-center  shadow-md rounded-[10px]  custom-select"
+                className="block min-w-[200px] h-[40px] sm:h-[50px] p-2 sm:p-4 font-bold text-sm text-center  shadow-md rounded-[10px]  custom-select"
             >
                 {selectedValue
                     ? arrayOfOptions.find((opt) => opt.value === selectedValue)?.label

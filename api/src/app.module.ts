@@ -11,26 +11,22 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    // Environment configuration
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
     }),
     
-    // Rate limiting - 100 requests per minute
     ThrottlerModule.forRoot([{
-      ttl: 60000, // 1 minute
-      limit: 100, // 100 requests per minute
+      ttl: 60000,
+      limit: 100,
     }]),
     
-    // Caching - 5 minutes default TTL
     CacheModule.register({
       isGlobal: true,
-      ttl: 300, // 5 minutes default TTL
-      max: 1000, // Maximum number of items in cache
+      ttl: 300,
+      max: 1000,
     }),
     
-    // MongoDB connection with optimizations
     MongooseModule.forRootAsync({
       useFactory: () => {
         const mongoUri = process.env.MONGODB_URI;
@@ -39,7 +35,6 @@ import { AppService } from './app.service';
         }
         return {
           uri: mongoUri,
-          // Performance optimizations
           maxPoolSize: 10,
           serverSelectionTimeoutMS: 5000,
           socketTimeoutMS: 45000,
@@ -47,14 +42,12 @@ import { AppService } from './app.service';
       },
     }),
     
-    // Feature modules
     UserModule,
     MoviesModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
-    // Global rate limiting
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

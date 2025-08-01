@@ -21,7 +21,7 @@
     "prev": "السابق",
     "next": "التالي",
     "select-language": "اختر اللغة",
-    "edit-movie": "تحرير الفيلم",
+    "edit": "تحرير الفيلم",
     "title-required": "العنوان مطلوب.",
     "year-required": "السنة مطلوبة.",
     "year-min": "لا يمكن أن تكون السنة قبل 1900.",
@@ -31,6 +31,7 @@
     "movie-update-success": "تم تحديث الفيلم بنجاح!",
     "movie-update-error": "فشل في تحديث الفيلم.",
     "language": "العربية",
-    "went-wrong": "حدث خطأ ما"
+    "went-wrong": "حدث خطأ ما",
+    "← back": "← عاد"
   }
   

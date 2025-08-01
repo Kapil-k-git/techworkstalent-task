@@ -17,16 +17,13 @@ export class UserService {
   async signUp(signUpDto: SignUpDto) {
     const { email, password } = signUpDto;
 
-    // Check if user already exists
     const existingUser = await this.findUserByEmail(email);
     if (existingUser) {
       throw new ConflictException('User already exists with this email');
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
     const userFound = await this.createUser({
       email,
       password: hashedPassword,
@@ -50,19 +47,16 @@ export class UserService {
   async signIn(signInDto: SignInDto) {
     const { email, password } = signInDto;
 
-    // Find user by email
     const userFound = await this.findUserByEmail(email);
     if (!userFound) {
       throw new NotFoundException('User Not Found');
     }
 
-    // Compare passwords
     const isPasswordValid = await bcrypt.compare(password, userFound.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid Credentials');
     }
 
-    // Generate token
     const token = await this.generateToken(userFound);
 
     return {

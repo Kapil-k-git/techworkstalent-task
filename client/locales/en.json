@@ -21,7 +21,7 @@
     "prev": "Prev",
     "next": "Next",
     "select-language" : "Select Language",
-    "edit-movie": "Edit Movie",
+    "edit": "Edit",
     "title-required": "Title is required.",
     "year-required": "Year is required.",
     "year-min": "Year cannot be earlier than 1900.",
@@ -31,6 +31,7 @@
     "movie-update-success": "Movie updated successfully!",
     "movie-update-error": "Failed to update the movie.",
     "language": "English",
-    "went-wrong": "Something went wrong"
+    "went-wrong": "Something went wrong",
+    "← back": "← back"
   }
   

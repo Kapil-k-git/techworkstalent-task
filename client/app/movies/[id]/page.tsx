@@ -18,7 +18,7 @@ const EditMovie = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
     const { id } = useParams();
-    const { t } = useTranslation('translation'); // Initialize translation
+    const { t } = useTranslation('translation');
     const movieId = id;
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const { movies, loading, error } = useSelector((state: any) => state.movies);
@@ -55,11 +55,11 @@ const EditMovie = () => {
     };
 
     const validationSchema = Yup.object({
-        title: Yup.string().required(t("title-required")), // Use translation
+        title: Yup.string().required(t("title-required")),
         year: Yup.number()
-            .required(t("year-required")) // Use translation
-            .min(1900, t("year-min")) // Use translation
-            .max(new Date().getFullYear(), t("year-max")), // Use translation
+            .required(t("year-required"))
+            .min(1900, t("year-min"))
+            .max(new Date().getFullYear(), t("year-max")),
     });
 
     const handleSubmit = async (values: any) => {
@@ -87,14 +87,13 @@ const EditMovie = () => {
 
             if (formData.has("title") || formData.has("year") || formData.has("poster")) {
                 await dispatch(updateMovie({ id: movieId, formData }));
-                console.log(movies, "res");
-                toast.success(movies.message || t("movie-update-success")); // Use translation
+                toast.success(movies.message || t("movie-update-success"));
                 router.push("/movies")
             } else {
-                console.log(t("no-changes-detected")); // Use translation
+                console.log(t("no-changes-detected"));
             }
         } catch (err) {
-            toast.error(error.message || t("movie-update-error")); // Use translation
+            toast.error(error.message || t("movie-update-error"));
         }
 
     };
@@ -104,7 +103,7 @@ const EditMovie = () => {
             <div className="flex justify-between items-center text-white">
                 <div className="flex flex-col items-start justify-center gap-2">
                     <h1 className="text-[16px] md:text-[48px] text-white font-semibold">
-                        {t("Edit")} {/* Use translation */}
+                        {t("edit")}
                     </h1>
                     <button
                         type="button"
@@ -137,7 +136,7 @@ const EditMovie = () => {
                                                     name="title"
                                                     error={errors.title}
                                                     value={values.title}
-                                                    placeholder={t("title")} // Use translation
+                                                    placeholder={t("title")}
                                                     onChange={handleChange}
 
                                                 />
@@ -147,7 +146,7 @@ const EditMovie = () => {
                                                     type="number"
                                                     name="year"
                                                     error={errors.year}
-                                                    placeholder={t("year")} // Use translation
+                                                    placeholder={t("year")}
                                                     value={values.year}
                                                     onChange={handleChange}
 
@@ -162,7 +161,7 @@ const EditMovie = () => {
                                                 {imagePreview ? (
                                                     <img
                                                         src={imagePreview}
-                                                        alt={t("selected-image")} // Use translation
+                                                        alt={t("selected-image")}
                                                         className="w-full h-full object-cover rounded-lg"
                                                     />
                                                 ) : (<>{values.poster && <Image
@@ -192,7 +191,7 @@ const EditMovie = () => {
                                                     name="title"
                                                     error={errors.title}
                                                     value={values.title}
-                                                    placeholder={t("title")} // Use translation
+                                                    placeholder={t("title")}
                                                     onChange={handleChange}
 
                                                 />
@@ -202,7 +201,7 @@ const EditMovie = () => {
                                                     type="number"
                                                     name="year"
                                                     error={errors.year}
-                                                    placeholder={t("year")} // Use translation
+                                                    placeholder={t("year")}
                                                     value={values.year}
                                                     onChange={handleChange}
 
@@ -215,9 +214,9 @@ const EditMovie = () => {
                                                 type="button"
                                                 onClick={() => { resetForm(); setImagePreview(null) }}
                                             >
-                                                {t("cancel")} {/* Use translation */}
+                                                {t("cancel")}
                                             </PrimaryButton>
-                                            <PrimaryButton type="submit" className="bg-[#2BD17E]">{t("submit")}</PrimaryButton> {/* Use translation */}
+                                            <PrimaryButton type="submit" className="bg-[#2BD17E]">{t("submit")}</PrimaryButton>
                                         </div>
                                     </div>
                                 </div>

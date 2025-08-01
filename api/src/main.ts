@@ -15,7 +15,6 @@ async function bootstrap() {
     
     const port = process.env.PORT || 8080;
     
-    // CORS configuration
     app.enableCors({
       origin: process.env.NODE_ENV === 'production' 
         ? process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000']
@@ -23,7 +22,6 @@ async function bootstrap() {
       credentials: true,
     });
     
-    // Helmet security
     app.use(
       helmet({
         contentSecurityPolicy: false,
@@ -31,28 +29,24 @@ async function bootstrap() {
       })
     );
     
-    // Serve static files
     app.useStaticAssets(join(process.cwd(), 'uploads'), {
       prefix: '/uploads/',
     });
     
-    // Global validation pipe with class-validator & class-transformer
     app.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
-        forbidNonWhitelisted: false, // Allow unknown properties (for file uploads)
-        transform: true, // Enable class-transformer
+        forbidNonWhitelisted: false,
+        transform: true,
         transformOptions: {
-          enableImplicitConversion: true, // Auto convert types
+          enableImplicitConversion: true,
         },
-        skipMissingProperties: true, // Skip validation for missing properties
+        skipMissingProperties: true,
       })
     );
     
-    // Global prefix
     app.setGlobalPrefix('api');
     
-    // Swagger documentation
     const config = new DocumentBuilder()
       .setTitle('Movie API')
       .setDescription('Movie API Documentation with Essential Features')

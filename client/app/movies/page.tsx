@@ -23,6 +23,7 @@ const Movies = () => {
 
     const logout = () => {
         localStorage.clear();
+        sessionStorage.clear();
         router.push("/");
     };
 

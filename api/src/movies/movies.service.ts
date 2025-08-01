@@ -23,7 +23,6 @@ export class MoviesService {
 
       const newMovie = await this.movieModel.create(movieData);
       
-      // Clear movies list cache when new movie is created
       await this.cacheManager.del('movies:all');
       
       return newMovie;
@@ -36,7 +35,6 @@ export class MoviesService {
   }
 
   async getMovieById(id: string): Promise<MovieDocument> {
-    // Try cache first
     const cacheKey = `movie:${id}`;
     const cachedMovie = await this.cacheManager.get<MovieDocument>(cacheKey);
     
@@ -49,7 +47,6 @@ export class MoviesService {
       throw new NotFoundException('Movie not found');
     }
 
-    // Cache the result for 5 minutes
     await this.cacheManager.set(cacheKey, movie, 300);
     
     return movie;
@@ -78,7 +75,6 @@ export class MoviesService {
       perPage,
     };
 
-    // Cache for 2 minutes (shorter than individual movies)
     await this.cacheManager.set(cacheKey, result, 120);
 
     return result;
@@ -105,7 +101,6 @@ export class MoviesService {
       throw new NotFoundException('Movie not found');
     }
 
-    // Clear related cache entries
     await this.cacheManager.del(`movie:${id}`);
     await this.cacheManager.del('movies:all');
 
@@ -118,12 +113,10 @@ export class MoviesService {
       throw new NotFoundException('Movie not found');
     }
 
-    // Clear related cache entries
     await this.cacheManager.del(`movie:${id}`);
     await this.cacheManager.del('movies:all');
   }
 
-  // Search movies with caching
   async searchMovies(query: string, page: number = 1, perPage: number = 10) {
     const cacheKey = `search:${query}:${page}:${perPage}`;
     const cachedResult = await this.cacheManager.get(cacheKey);
@@ -134,7 +127,6 @@ export class MoviesService {
 
     const skip = (page - 1) * perPage;
     
-    // Use text search for better performance
     const [movies, totalMovies] = await Promise.all([
       this.movieModel
         .find({ $text: { $search: query } })
@@ -153,7 +145,6 @@ export class MoviesService {
       query,
     };
 
-    // Cache search results for 5 minutes
     await this.cacheManager.set(cacheKey, result, 300);
 
     return result;

@@ -39,7 +39,6 @@ export const fetchMovies = createAsyncThunk(
           perPage,
         },
       });
-      console.log("response", response.data);
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -98,7 +97,6 @@ export const updateMovie = createAsyncThunk(
           ...(token && { Authorization: `Bearer ${token}` }),
         },
       });
-      console.log(response,"response")
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || error.message);

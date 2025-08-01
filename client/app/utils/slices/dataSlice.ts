@@ -27,7 +27,6 @@ export const signIn = createAsyncThunk(
       });
       return response.data;
     } catch (error: any) {
-      console.log(error,"erro")
       return rejectWithValue(error.response?.data?.error || "Sign-in failed. Please try again.");
     }
   }

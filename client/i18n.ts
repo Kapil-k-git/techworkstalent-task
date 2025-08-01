@@ -9,7 +9,7 @@ import de from './locales/de.json';
 import ar from './locales/ar.json';
 
 i18n
-  .use(initReactI18next) // Passes i18n down to react-i18next
+  .use(initReactI18next)
   .init({
     resources: {
       en: { translation: en },
