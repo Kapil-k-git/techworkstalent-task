@@ -5,7 +5,7 @@ export type UserDocument = User & Document;
 
 @Schema({ timestamps: true })
 export class User {
-  @Prop({ required: true }) // Remove unique: true to avoid duplication
+  @Prop({ required: true })
   email: string;
 
   @Prop({ required: true })
@@ -20,7 +20,6 @@ export class User {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
-// Single comprehensive index for email (unique + case-insensitive)
 UserSchema.index(
   { email: 1 }, 
   { 

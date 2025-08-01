@@ -18,17 +18,15 @@ const createApp = async (): Promise<NestExpressApplication> => {
       AppModule,
       new ExpressAdapter(expressApp),
       { 
-        logger: false // Disable logging to avoid issues
+        logger: false
       }
     );
 
-    // Simple CORS
     app.enableCors({
       origin: true,
       credentials: true,
     });
 
-    // Simple validation
     app.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
@@ -36,7 +34,6 @@ const createApp = async (): Promise<NestExpressApplication> => {
       })
     );
 
-    // Set global prefix
     app.setGlobalPrefix('api');
 
     await app.init();
@@ -48,7 +45,6 @@ const createApp = async (): Promise<NestExpressApplication> => {
   }
 };
 
-// Serverless function handler
 export default async (req: any, res: any) => {
   try {
     const app = await createApp();

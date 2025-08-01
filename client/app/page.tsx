@@ -121,7 +121,7 @@ export default function Home() {
                     </span>
                   </label>
                 </div>
-                <span className="text-white text-sm">{t('rememberMe')}</span> {/* Translate Remember Me */}
+                <span className="text-white text-sm">{t('rememberMe')}</span>
               </div>
 
               <PrimaryButton type="submit" className="bg-[#2BD17E]">{t('Login')}</PrimaryButton>

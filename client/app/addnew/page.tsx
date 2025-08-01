@@ -12,6 +12,7 @@ import Download from "@/public/assets/svg/download.svg";
 import { useAppDispatch } from "@/app/utils/store/store";
 import { toast } from "react-toastify";
 import { useTranslation } from "@/node_modules/react-i18next";
+import { BackArrow } from "../movies/[id]/page";
 
 const AddNew = () => {
     const dispatch = useAppDispatch();
@@ -61,12 +62,18 @@ const AddNew = () => {
                 <h1 className="text-[20px] sm:text-[24px] md:text-[48px] text-white font-semibold">
                     {t('createMovie')}
                 </h1>
+                
                 <button
                     type="button"
                     onClick={() => router.push("/movies")}
-                    className="bg-[#093545] text-white rounded hover:underline transition"
+                    className="bg-[#093545] flex items-center gap-2 text-white rounded hover:underline transition"
                 >
-                 {t('← back') || "← Back"}
+                    <span>
+                        <BackArrow />
+                    </span>
+                    <h5>
+                 {t(' back') || "Back"}
+                    </h5>
                 </button>
             </div>
             </div>

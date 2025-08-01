@@ -15,8 +15,6 @@ export class MoviesService {
 
   async createMovie(createMovieDto: CreateMovieDto, file: Express.Multer.File): Promise<MovieDocument> {
     try {
-      // For serverless, we'll store the file as base64 or use cloud storage
-      // For now, let's store as base64 in the database
       const posterPath = file ? `data:${file.mimetype};base64,${file.buffer.toString('base64')}` : '/placeholder.jpg';
       
       const movieData = {

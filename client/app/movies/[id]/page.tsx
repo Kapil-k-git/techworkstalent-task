@@ -13,7 +13,14 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from "@/node_modules/react-i18next";
 
-
+export const BackArrow = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+       stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+       strokeLinejoin="round" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" />
+    <polyline points="12 19 5 12 12 5" />
+  </svg>
+);
 const EditMovie = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -108,9 +115,14 @@ const EditMovie = () => {
                     <button
                         type="button"
                         onClick={() => router.push("/movies")}
-                        className="bg-[#093545] text-white rounded hover:underline transition"
+                        className="bg-[#093545] flex items-center gap-2 text-white rounded hover:underline transition"
                     >
-                    {t('← back') || "← Back"}
+                        <span>
+                            <BackArrow />
+                        </span>
+                    <h5>
+                        {t('back') || "Back"}
+                    </h5>
                     </button>
                 </div>
             </div>

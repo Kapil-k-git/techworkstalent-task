@@ -75,7 +75,6 @@ export class MoviesController {
       throw new BadRequestException('Poster image is required');
     }
 
-    // Pass the file object directly to the service (not a path)
     const movie = await this.moviesService.createMovie(createMovieDto, file);
 
     return {

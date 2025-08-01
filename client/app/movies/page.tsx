@@ -58,7 +58,13 @@ const Movies = () => {
     return (
         <>
             {movies.length === 0 ? (
-                <div className="flex flex-col justify-center items-center min-h-[calc(100vh-120px)] gap-10 px-4 text-white">
+                <div className="px-4 relative">
+                    <div className="cursor-pointer flex absolute right-7 top-10 items-center justify-center gap-2 sm:gap-3" onClick={logout}>
+                        <h4 className="font-bold text-white text-base">{t('logout')}</h4>
+                            <Image src={Logout} width={32} height={32} className="max-lg:size-6" alt="logout" />
+                        </div>
+                    <div className="flex flex-col justify-center items-center min-h-[calc(100vh-120px)] gap-10  text-white">
+                          
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl text-center font-semibold leading-tight">
                         {t('emptyList')}
                     </h1>
@@ -72,6 +78,7 @@ const Movies = () => {
                         </PrimaryButton>
                     </div>
                 </div>
+            </div>
             ) : (
                 <div className="p-8 sm:py-10 sm:px-20 lg:py-20 lg:px-40 flex flex-col gap-10 md:gap-[120px] mx-auto max-w-[1440px] w-full min-h-[calc(100vh-120px)]">
                     <div className="flex justify-between items-center text-white">
