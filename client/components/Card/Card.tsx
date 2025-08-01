@@ -8,12 +8,11 @@ interface MovieCardProps {
 }
 
 const Card: React.FC<MovieCardProps> = ({ title, year, poster }) => {
-  const imgUrl = process.env.NEXT_PUBLIC_SERVER_URL
   return (
     <div className="w-full bg-[#092C39] rounded-xl overflow-hidden cursor-pointer p-2 transform transition-transform duration-300 hover:scale-105">
       <div className="size-full min-h-[400px] max-h-[400px]">
         <Image
-          src={`${imgUrl}${poster}`}
+          src={poster} // Just use poster directly - it's already a full Cloudinary URL
           alt={title}
           className="w-full h-full object-cover object-center rounded-xl"
           width={450}

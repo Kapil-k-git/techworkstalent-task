@@ -5,16 +5,32 @@ const nextConfig = {
   
   images: {
     remotePatterns: [
+      // Local development - keep for any local assets
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '8000', // Updated to match your API port
+        port: '8080', // Updated to match your NestJS API port
         pathname: '/uploads/**', 
       },
+      // Vercel deployment
       {
         protocol: 'https',
         hostname: '*.vercel.app',
         pathname: '/uploads/**',
+      },
+      // Cloudinary images - ADDED
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+      // Optional: Support multiple Cloudinary accounts
+      {
+        protocol: 'https',
+        hostname: '*.cloudinary.com',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
@@ -24,11 +40,11 @@ const nextConfig = {
     return process.env.NODE_ENV === 'development' ? [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8000/api/:path*', // Updated to match your API port
+        destination: 'http://localhost:8080/api/:path*', // Updated to match your NestJS API port
       },
     ] : [];
   },
-
+  
   // Headers for CORS in production
   async headers() {
     return [

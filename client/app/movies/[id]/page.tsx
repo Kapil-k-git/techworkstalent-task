@@ -13,7 +13,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from "@/node_modules/react-i18next";
 
-
 const EditMovie = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -22,13 +21,24 @@ const EditMovie = () => {
     const movieId = id;
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const { movies, loading, error } = useSelector((state: any) => state.movies);
-    const imgUrl = process.env.NEXT_PUBLIC_SERVER_URL
+    
     const [movieData, setMovieData] = useState({
         title: "",
         year: "",
         poster: "",
     });
 
+    // Helper function to get the correct image URL
+    const getImageUrl = (posterValue: string): string => {
+        // If it's already a full URL (starts with http/https), use it directly
+        if (posterValue && posterValue.startsWith('http')) {
+            return posterValue;
+        }
+        
+        // If it's a local path, prepend the server URL
+        const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:8080';
+        return `${serverUrl}${posterValue}`;
+    };
 
     useEffect(() => {
         if (movieId && typeof movieId === "string") {
@@ -65,15 +75,12 @@ const EditMovie = () => {
     const handleSubmit = async (values: any) => {
         try {
             const formData = new FormData();
-
             if (values.title !== movieData.title) {
                 formData.append("title", values.title);
             }
-
             if (values.year.toString() !== movieData.year) {
                 formData.append("year", values.year.toString());
             }
-
             if (values.poster && values.poster !== movieData.poster) {
                 if (values.poster instanceof File) {
                     formData.append("poster", values.poster);
@@ -84,7 +91,6 @@ const EditMovie = () => {
                     formData.append("poster", file);
                 }
             }
-
             if (formData.has("title") || formData.has("year") || formData.has("poster")) {
                 await dispatch(updateMovie({ id: movieId, formData }));
                 toast.success(movies.message || t("movie-update-success"));
@@ -95,7 +101,6 @@ const EditMovie = () => {
         } catch (err) {
             toast.error(error.message || t("movie-update-error"));
         }
-
     };
 
     return (
@@ -110,7 +115,7 @@ const EditMovie = () => {
                         onClick={() => router.push("/movies")}
                         className="bg-[#093545] text-white rounded hover:underline transition"
                     >
-                    {t('← back') || "← Back"}
+                        {t('← back') || "← Back"}
                     </button>
                 </div>
             </div>
@@ -138,7 +143,6 @@ const EditMovie = () => {
                                                     value={values.title}
                                                     placeholder={t("title")}
                                                     onChange={handleChange}
-
                                                 />
                                             </div>
                                             <div className="lg:w-[50%] w-full">
@@ -149,7 +153,6 @@ const EditMovie = () => {
                                                     placeholder={t("year")}
                                                     value={values.year}
                                                     onChange={handleChange}
-
                                                 />
                                             </div>
                                         </div>
@@ -164,15 +167,21 @@ const EditMovie = () => {
                                                         alt={t("selected-image")}
                                                         className="w-full h-full object-cover rounded-lg"
                                                     />
-                                                ) : (<>{values.poster && <Image
-                                                    src={`${imgUrl}${values.poster}`}
-                                                    alt={values.title}
-                                                    width={450}
-                                                    height={500}
-                                                    className="h-full w-full object-cover rounded-lg"
-                                                />}
-                                                </>
-
+                                                ) : (
+                                                    <>
+                                                        {values.poster && 
+                                                            <Image
+                                                                src={getImageUrl(values.poster)}
+                                                                alt={values.title}
+                                                                width={450}
+                                                                height={500}
+                                                                className="h-full w-full object-cover rounded-lg"
+                                                                priority={false}
+                                                                placeholder="blur"
+                                                                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                                                            />
+                                                        }
+                                                    </>
                                                 )}
                                                 <input
                                                     id="fileInput"
@@ -193,7 +202,6 @@ const EditMovie = () => {
                                                     value={values.title}
                                                     placeholder={t("title")}
                                                     onChange={handleChange}
-
                                                 />
                                             </div>
                                             <div className="lg:w-[50%] w-full">
@@ -204,7 +212,6 @@ const EditMovie = () => {
                                                     placeholder={t("year")}
                                                     value={values.year}
                                                     onChange={handleChange}
-
                                                 />
                                             </div>
                                         </div>
