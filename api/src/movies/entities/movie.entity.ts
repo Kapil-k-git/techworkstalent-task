@@ -1,3 +1,4 @@
+// src/movies/entities/movie.entity.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
@@ -5,14 +6,17 @@ export type MovieDocument = Movie & Document;
 
 @Schema({ timestamps: true })
 export class Movie {
-  @Prop({ required: true }) // Remove unique: true to avoid duplication
+  @Prop({ required: true })
   title: string;
 
   @Prop({ required: true })
   year: string;
 
   @Prop({ required: true })
-  poster: string;
+  poster: string; // Cloudinary URL
+
+  @Prop({ required: false })
+  cloudinaryPublicId: string; // Store Cloudinary public ID for deletion
 
   @Prop()
   createdAt: Date;

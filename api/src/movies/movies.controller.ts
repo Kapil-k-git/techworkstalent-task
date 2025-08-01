@@ -32,7 +32,7 @@ import {
   MovieCreateResponseDto,
   PaginationQueryDto,
 } from './dto/movie.dto';
-import { multerConfig } from '../common/config/multer.config';
+import { CloudinaryInterceptor } from '../common/interceptors/cloudinary.interceptor';
 import { JwtAuthGuard } from '../user/guards/jwt-auth.guard';
 
 @ApiTags('Movies')
@@ -43,7 +43,7 @@ export class MoviesController {
   @Post()
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @UseInterceptors(FileInterceptor('poster', multerConfig))
+  @UseInterceptors(FileInterceptor('poster'), CloudinaryInterceptor)
   @ApiOperation({ summary: 'Create a new movie' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -75,7 +75,7 @@ export class MoviesController {
       throw new BadRequestException('Poster image is required');
     }
 
-    // Pass the file object directly to the service (not a path)
+    // The CloudinaryInterceptor will add cloudinaryUrl to the file object
     const movie = await this.moviesService.createMovie(createMovieDto, file);
 
     return {
@@ -152,7 +152,7 @@ export class MoviesController {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @UseInterceptors(FileInterceptor('poster', multerConfig))
+  @UseInterceptors(FileInterceptor('poster'), CloudinaryInterceptor)
   @ApiOperation({ summary: 'Update movie by ID' })
   @ApiParam({ name: 'id', description: 'Movie ID' })
   @ApiConsumes('multipart/form-data')
