@@ -27,6 +27,8 @@ const initialState: MovieState = {
   error: null,
 };
 
+const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
 export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
   async ({ page, perPage }: { page: number; perPage: number }, { rejectWithValue }) => {
@@ -67,6 +69,7 @@ export const createMovie = createAsyncThunk(
       const response = await axios.post(`${apiUrls.createMovie}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
       return response.data;
@@ -85,6 +88,7 @@ export const updateMovie = createAsyncThunk(
       const response = await axios.put(apiUrls.updateMovie(id), formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
         },
       });
       console.log(response,"response")
